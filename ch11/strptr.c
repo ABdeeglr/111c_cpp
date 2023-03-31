@@ -2,7 +2,7 @@
 
 int main(int argc, char const *argv[])
 {
-	printf("%%s->%s, %%p->%p, %%c->%c\n", *"We", "Are", *"Space farers");
+	printf("%%s->%s, %%p->%p, %%c->%c\n", "We", "Are", *"Space farers");
 
 	return 0;
 }
