@@ -9,18 +9,20 @@ unsigned long readfile(char * filename) {
     int ch;
     FILE *fp;
     unsigned long count = 0;
-
+    
     if ((fp = fopen(filename, "r")) == NULL) {
         puts("There is no such file.");
         exit(EXIT_FAILURE);
     }
-
+    printf("<%p>\n", fp);
     while ((ch = getc(fp)) != EOF) {
         putc(ch, stdout);
         count++;
     }
-
+    
+    printf("<%p>\n", fp);
     fclose(fp);
+    printf("<%p>\n", fp);
     return count;
 }
 
