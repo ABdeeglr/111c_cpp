@@ -87,5 +87,3 @@ va_start();va_arg();va_copy();va_end();
 6. names_st.h, name_st.c, useheader.c | 这三个文件展示了 `#include` 的使用方式。链接是在哪个阶段的？
 
 7. test.c | 测试预定义宏
-
-8. 
