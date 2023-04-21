@@ -53,7 +53,7 @@ String * getString() {
         current->str[count - 1] = ch;
         count++;
         
-        if (count % 10 == 0) {
+        if (count % (SIZE+1) == 0) {
             prev = current;
             current = (StringNode *)malloc(sizeof(StringNode));
             prev->next = current;
@@ -94,8 +94,9 @@ void freeString(String * using_str) {
         current = current->next;
         index++;
     }
+    nodelist[index] = current;
 
-    for (index = 0; index < size - 1; index++) {
+    for (index = 0; index < size; index++) {
         free(nodelist[index]);
     }
 
