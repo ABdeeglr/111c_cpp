@@ -6,24 +6,27 @@
 
 /* ---------- Typedef ---------- */
 typedef struct string_node {
-    char str[SIZE];
+    char str[SIZE]; // 字符存储的单位长度
     struct string_node * next;
 } StringNode;
 
 typedef struct string {
-    int size;
-    struct string_node * firstnode;
+    int item_size; // 存储的字符节点数
+    struct string_node * firstnode; // 字符节点的头指针
 } String;
 
 
 
 /* ------ Function Statement ------ */
-// 从 stdin 读取内容, 创建String
+// 从 stdin 读取内容, 创建String. 开发完成.
 String * getString();
-// 打印 String
+// 打印 String, 出现了bug
 void putString(String * using_str);
-// 释放 String
+// 释放 String. 开发完成.
 void freeString(String * using_str);
+// 将 String 对象转化为 char* 字符串
+char * toString(String * using_str);
+
 
 
 /* ---------- Functions ---------- */
@@ -37,7 +40,7 @@ String * getString() {
     // 将 String 的首节点绑定到 head
     ret_val->firstnode = head;
     // 初始化 String 的节点数
-    ret_val->size = 1;
+    ret_val->item_size = 1;
 
     // 在栈分配两个指针
     StringNode * current, * prev;
@@ -57,7 +60,7 @@ String * getString() {
             prev = current;
             current = (StringNode *)malloc(sizeof(StringNode));
             prev->next = current;
-            ret_val->size++;
+            ret_val->item_size++;
             count = 1;
         }
     }
@@ -72,13 +75,13 @@ void putString(String * using_str) {
     // have implict bugs here
     int i;
     StringNode * current = using_str->firstnode;
-    for (i = 0; i < using_str->size; i++) {
-        char * sentence = current->str;
-        unsigned short int index;
-        for (index = 0; index < SIZE; index++) {
-            putchar(sentence[index]);
-        }
+    char * sentence;
+    for (i = 0; i < using_str->item_size; i++) {
+        sentence = current->str;
+        
+        
         current = current->next;
+        if (current) break;
     }
     putchar('\n');
 
@@ -86,7 +89,7 @@ void putString(String * using_str) {
 
 
 void freeString(String * using_str) {
-    int size = using_str->size;
+    int size = using_str->item_size;
     StringNode * current = using_str->firstnode;
     StringNode * nodelist[size];
     unsigned short int index = 0;
@@ -103,4 +106,20 @@ void freeString(String * using_str) {
 
     //free(using_str->firstnode);
     free(using_str);
+}
+
+
+char * toString(String * using_str) {
+    char * res = (char*)malloc(using_str->item_size*SIZE);
+    StringNode * current = using_str->firstnode;
+    char * ch = res;
+    int index = 0;
+    while (index < using_str->item_size) {
+        for (int i = 0; i < SIZE; i++) {
+            *ch = current->str[i];
+            ch++; 
+        }
+        
+        current = current->next;
+    }
 }
