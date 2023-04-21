@@ -69,6 +69,7 @@ String * getString() {
 
 
 void putString(String * using_str) {
+    // have implict bugs here
     int i;
     StringNode * current = using_str->firstnode;
     for (i = 0; i < using_str->size; i++) {
