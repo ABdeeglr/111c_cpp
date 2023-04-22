@@ -78,7 +78,7 @@ void putString(String * using_str) {
     char * sentence;
     for (i = 0; i < using_str->item_size; i++) {
         sentence = current->str;
-        
+        // 这里需要重新编写
         
         current = current->next;
         if (current) break;
